@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.InMemory
 {
-    //Bellek üzerinden ürünle ilgili veri erişim kodlarının yazılacağı yer.
+    //Bellek üzerinden ürünle ilgili veri erişim kodlarının yazılacağı kaynak dosyası.
     public class InMemoryProductDal : IProductDal
 
     {
+        //generic tipinde ürünleri tutan liste oluşturuldu.
         List<Product> _products;
 
         public InMemoryProductDal()
@@ -26,19 +27,6 @@ namespace DataAccess.Concrete.InMemory
             };
         }
 
-        public void Add(Product product)
-        {
-            _products.Add(product);
-        }
-
-        public void Delete(Product product)
-        {
-            //SingleOrDefault metodu, bir koleksiyon içinde belirli bir koşulu sağlayan yalnızca bir öğeyi seçer ve bu öğeyi döndürür.
-            Product productToDelete = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
-            _products.Remove(productToDelete);
-
-        }
-
         public List<Product> GetAll()
         {
             return _products;
@@ -49,6 +37,11 @@ namespace DataAccess.Concrete.InMemory
             return _products.Where(p => p.CategoryId == categoryId).ToList();
         }
 
+        public void Add(Product product)
+        {
+            _products.Add(product);
+        }
+
         public void Update(Product product)
         {
             Product productToUpdate = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
@@ -56,6 +49,14 @@ namespace DataAccess.Concrete.InMemory
             productToUpdate.CategoryId = product.CategoryId;
             productToUpdate.UnitPrice = product.UnitPrice;
             productToUpdate.UnitsInStock = product.UnitsInStock;
+        }
+
+        public void Delete(Product product)
+        {
+            //SingleOrDefault metodu, bir koleksiyon içinde belirli bir koşulu sağlayan yalnızca bir öğeyi seçer ve bu öğeyi döndürür.
+            Product productToDelete = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
+            _products.Remove(productToDelete);
+
         }
     }
 }
