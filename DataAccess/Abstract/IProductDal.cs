@@ -8,18 +8,9 @@ using System.Threading.Tasks;
 namespace DataAccess.Abstract
 {
     //Product ile ilgili veritabanında yapacağımız operasyonları içerir. ekle, sil, güncelle, listele gibi.
-    public interface IProductDal
+    public interface IProductDal:IEntityRepository<Product>
     {
-        // Bu metodun çağrılması durumunda, veritabanındaki tüm ürünleri içeren bir Product listesini döndürür. List<Product> türünde bir veri koleksiyonu döner.
-        List<Product> GetAll();
-
-        List<Product> GetAllByCategory(int categoryId);
-
-        void Add(Product product);
-
-        void Update(Product product);
-
-        void Delete(Product product);
+           
     }
 }
 
